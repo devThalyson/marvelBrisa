@@ -66,47 +66,64 @@ class _ComicCardState extends State<ComicCard> {
             ),
             Container(
               padding: EdgeInsets.all(5),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CustomText(
-                    texto: "Title: ${widget.comic.title}",
-                    cor: Colors.white,
-                    bold: true,
+              child: Card(
+                color: Colors.white10,
+                child: Container(
+                  padding: EdgeInsets.all(3),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: CustomText(
+                              texto: "Title: ${widget.comic.title}",
+                              bold: true,
+                              cor: Colors.white,
+                            ),
+                          ),
+                          _returnIcon(),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      CustomText(
+                        texto:
+                            "Description: ${widget.comic.description != null ? widget.comic.description : "Description not exists"}",
+                        bold: true,
+                        tamanhoFonte: 13,
+                        cor: Colors.white,
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  CustomText(
-                    texto:
-                        "Description: ${widget.comic.description != null ? widget.comic.description : "Description not exists"}",
-                    cor: Colors.white,
-                    bold: true,
-                    tamanhoFonte: 13,
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              top: 20,
-              left: 300,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    push(context, MapView());
-                  },
-                  icon: Image.asset("assets/images/maps.png"),
                 ),
               ),
             ),
           ],
         );
       },
+    );
+  }
+
+  _returnIcon() {
+    return Container(
+      margin: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: IconButton(
+        onPressed: () {
+          push(context, MapView());
+        },
+        icon: Container(
+          padding: EdgeInsets.all(5),
+          child: Image.asset("assets/images/maps.png"),
+        ),
+      ),
     );
   }
 }

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 
-//Classe que auxilia a criação da URL de acesso a api (junta as minhas chaves com um hash)
+//Classe que auxilia a criação da URL de acesso a api (junta as minhas chaves de api com um hash)
 class HelperUrlApi {
   static String publicApiKey = "8d1659d056386a45684e2ddbfce56be2";
   static String privateApiKey = "b101e3407b99901911547838c3d78247d6f3745b";
@@ -11,6 +11,7 @@ class HelperUrlApi {
   var timeStamp = DateTime.now();
   var hash;
 
+  //Função que retorna a URL pronta para acesso da API
   String gerarUrl() {
     gerarHash();
     String urlFinal =
@@ -19,6 +20,7 @@ class HelperUrlApi {
     return urlFinal;
   }
 
+  //Hash criado com a junção do timeStamp + minha chave privada + minha chave publica
   gerarHash() {
     hash = generateMd5(timeStamp.toIso8601String() +
         HelperUrlApi.privateApiKey +

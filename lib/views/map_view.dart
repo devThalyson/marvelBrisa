@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:marvel_brisa/controller/controller.dart';
+import 'package:marvel_brisa/controller/map_controller.dart';
 import 'package:marvel_brisa/custom_widgets/custom_snackbar.dart';
 import 'package:marvel_brisa/custom_widgets/custom_text.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -12,8 +12,7 @@ class MapView extends StatefulWidget {
 }
 
 class _MapViewState extends State<MapView> {
-  GoogleMapController mapController;
-  final _controller = Controller();
+  final _mapController = MapController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -37,15 +36,15 @@ class _MapViewState extends State<MapView> {
           child: Observer(
             builder: (_) {
               return GoogleMap(
-                onMapCreated: _onMapCreated,
+                onMapCreated: _mapController.onMapCreated,
                 initialCameraPosition: CameraPosition(
+                  //Posição inicial fixa em Ibicuitinga (minha cidade).
                   target: LatLng(-4.95962, -38.6284),
                   zoom: 11,
                 ),
-                markers: _controller.markers != null ? _controller.markers : {},
-                onTap: (position) {
-                  print(position);
-                },
+                markers: _mapController.markers != null
+                    ? _mapController.markers
+                    : {},
               );
             },
           ),
@@ -54,15 +53,13 @@ class _MapViewState extends State<MapView> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Expanded(
-              child: Container(
-                child: Form(
-                  key: _formKey,
-                  child: TextFormField(
-                    validator: _controller.validatorFormField,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(3),
-                      hintText: "Type an address",
-                    ),
+              child: Form(
+                key: _formKey,
+                child: TextFormField(
+                  validator: _mapController.validatorFormField,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(3),
+                    hintText: "Type an address",
                   ),
                 ),
               ),
@@ -70,23 +67,23 @@ class _MapViewState extends State<MapView> {
             Container(
               child: IconButton(
                 onPressed: () {
+                  //A função só vai prosseguir se os campos de formulário forem válidos.
                   if (!_formKey.currentState.validate()) {
                     return;
                   }
-                  _controller.setPosition();
-                  mapController.moveCamera(
-                    CameraUpdate.newLatLng(_controller.position),
-                  );
+
+                  //Criando um marker fixo para o exemplo.
                   final Marker marker = Marker(
                     markerId: MarkerId("123"),
-                    position: _controller.position,
+                    //Latitude e longitude fixas do ponto a ser marcado no mapa.
+                    position: LatLng(-7.219996596848331, -39.32716231676682),
                     onTap: _showDialog,
                     infoWindow: InfoWindow(
                       title: "Brisanet",
                       snippet: "Juazeiro do Norte / CE",
                     ),
                   );
-                  _controller.setMarker(marker);
+                  _mapController.setMarker(marker);
                 },
                 icon: Icon(
                   Icons.search,
@@ -100,10 +97,7 @@ class _MapViewState extends State<MapView> {
     );
   }
 
-  _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-  }
-
+  //Função que chama um método costumizado com o objetivo de mostrar um diálogo e logo depois uma snackbar.
   _showDialog() {
     ShowDialog().onClickDialogOkorNot(
       context,
