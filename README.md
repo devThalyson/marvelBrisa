@@ -1,16 +1,10 @@
-# marvel_brisa
+<h1>Covid App com Flutter! 💙</h1>
 
-A new Flutter project.
+<h2>📢 Descrição do App 📢: </h2>
+<p>💻 O Covid App é um aplicativo que mostra estatísticas da Covid-19 por estados do Brasil. A aplicação consome dados da seguinte Api: https://covid19-brazil-api.now.sh/api/report/v1 . Para consumo de dados, foi utilizado a lib "http", visto que nessa versão não seria necessário demasiados tipos de requisições.💻</p>
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<h3>Libs utilizadas: </h3>
+  <p>🟦 mobx</p>
+  <p>🟦 flutter_mobx</p>
+  <p>🟦 http</p>
+  <p>🟦 intl</p>
