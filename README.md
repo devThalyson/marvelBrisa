@@ -10,3 +10,10 @@
   <p>🟦 crypto</p>
   <p>🟦 cached_network_image</p>
   <p>🟦 google_maps_flutter</p>
+  
+ <h3>Instruções para rodar a aplicação: </h3>
+  <p>⚫ git clone https://github.com/devThalyson/marvelBrisa.git</p>
+  <p>⚫ cd marvelBrisa</p>
+  <p>⚫ flutter pub get</p>
+  <p>⚫ flutter run lib/main.dart</p>
+  <p>⚫ selecione o device que vai rodar a aplicação.</p>
