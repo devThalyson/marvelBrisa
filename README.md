@@ -16,4 +16,4 @@
   <p>⚫ cd marvelBrisa</p>
   <p>⚫ flutter pub get</p>
   <p>⚫ flutter run lib/main.dart</p>
-  <p>⚫ selecione o device que vai rodar a aplicação.</p>
+  <p>⚫ Selecione o device que vai rodar a aplicação.</p>
